@@ -73,9 +73,9 @@ public class CapybaraMain implements ModInitializer {
 		for(Biome biome : Registry.BIOME) {
 			if(biome.getCategory() == Biome.Category.SWAMP || biome.getCategory() == Biome.Category.RIVER ) {
 				biome.addFeature(
-						GenerationStep.Feature.RAW_GENERATION,
+						GenerationStep.Feature.RAW_GENERATION,	new ConfiguredFeature<>(HOT_SPRING,new DefaultFeatureConfig()));
 			}
-						new ConfiguredFeature<>(HOT_SPRING,new DefaultFeatureConfig()));
+
 		}
 
 		System.out.println("Completed initialization of Capybara-Commune!");
