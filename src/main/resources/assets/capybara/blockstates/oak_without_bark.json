@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y":    { "model": "capybara:block/oak_without_bark" },
+    "axis=z":     { "model": "capybara:block/oak_without_bark", "x": 90 },
+    "axis=x":     { "model": "capybara:block/oak_without_bark", "x": 90, "y": 90 }
+  }
+}
