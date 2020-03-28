@@ -12,7 +12,7 @@ import net.minecraft.util.registry.Registry;
 
 
 public class CapybaraMain implements ModInitializer {
-	public static final String CAPYBARA_NAMESPACE = "capybara-commune";
+	public static final String CAPYBARA_NAMESPACE = "capybara";
 
 	// Setup the creative item group
 	public static ItemGroup CAPYBARA_ITEM_GROUP = FabricItemGroupBuilder.create(
@@ -22,7 +22,6 @@ public class CapybaraMain implements ModInitializer {
 
 
 	public static final Block OAK_WITHOUT_BARK_BLOCK = new Block(FabricBlockSettings.of(Material.WOOD).build());
-	public static final Item OAK_WITHOUT_BARK_ITEM = new OakBark(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 
 	public static final Item OAK_BARK = new OakBark(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 
