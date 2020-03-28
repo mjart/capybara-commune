@@ -1,8 +1,13 @@
 package net.capybara;
 
+import net.capybara.items.OakBark;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -10,9 +15,16 @@ import net.minecraft.util.registry.Registry;
 public class CapybaraMain implements ModInitializer {
 	public static final String CAPYBARA_NAMESPACE = "capybara-commune";
 
-	public static final Item OAK_BARK = new Item(new Item.Settings().group(ItemGroup.MISC));
-	public static final Item CAPYBARA_MEAT = new Item(new Item.Settings().group(ItemGroup.MISC));
-	public static final Item CAPYBARA_PELT = new Item(new Item.Settings().group(ItemGroup.MISC));
+	// Setup the creative item group
+	public static ItemGroup CAPYBARA = FabricItemGroupBuilder.create(
+			new Identifier("capybara", "general"))
+			.icon(() -> new ItemStack(Items.BOWL))
+			.build();
+
+
+	public static final Item OAK_BARK = new OakBark(new Item.Settings().group(CapybaraMain.CAPYBARA));
+	public static final Item CAPYBARA_MEAT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA));
+	public static final Item CAPYBARA_PELT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA));
 
 	@Override
 	public void onInitialize() {
