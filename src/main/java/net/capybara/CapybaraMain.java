@@ -6,10 +6,7 @@ import net.capybara.items.OakBark;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.block.LogBlock;
-import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.*;
 import net.minecraft.item.*;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
@@ -29,7 +26,7 @@ public class CapybaraMain implements ModInitializer {
 			.build();
 
 
-	public static final Block OAK_WITHOUT_BARK = new LogBlock(MaterialColor.ORANGE, FabricBlockSettings.of(Material.WOOD).build());
+	public static final Block OAK_WITHOUT_BARK = new LogBlock(MaterialColor.WOOD, FabricBlockSettings.of(Material.WOOD).strength(2.0f, 2.0f).build());
 
 	public static final Item OAK_BARK = new OakBark(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 	public static final Item CAPYBARA_MEAT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
