@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/cube_column",
   "textures": {
-    "all": "capybara:block/oak_without_bark"
+    "end": "block/oak_log_top",
+    "side": "capybara:block/oak_without_bark"
   }
 }
