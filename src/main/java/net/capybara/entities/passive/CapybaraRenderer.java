@@ -16,6 +16,6 @@ public class CapybaraRenderer extends MobEntityRenderer<CapybaraEntity, Capybara
 
     @Override
     public Identifier getTexture(CapybaraEntity CapybaraEntity) {
-        return new Identifier("capybara-commune:textures/item/capybara_pelt");
+        return new Identifier("capybara:textures/item/capybara_pelt");
     }
 }
