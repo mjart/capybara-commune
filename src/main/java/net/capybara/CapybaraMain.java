@@ -9,6 +9,7 @@ import net.minecraft.util.registry.Registry;
 
 public class CapybaraMain implements ModInitializer {
 
+	public static final Item OAK_BARK = new Item(new Item.Settings().group(ItemGroup.MISC));
 	public static final Item CAPYBARA_MEAT = new Item(new Item.Settings().group(ItemGroup.MISC));
 	public static final Item CAPYBARA_PELT = new Item(new Item.Settings().group(ItemGroup.MISC));
 	@Override
@@ -17,9 +18,9 @@ public class CapybaraMain implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		Registry.register(Registry.ITEM, new Identifier("capybarameat", "capybara-meat"), CAPYBARA_MEAT);
-		Registry.register(Registry.ITEM, new Identifier("capybarapelt", "capybara-pelt"), CAPYBARA_PELT);
-
+		Registry.register(Registry.ITEM, new Identifier("capybara", "capybara-meat"), CAPYBARA_MEAT);
+		Registry.register(Registry.ITEM, new Identifier("capybara", "capybara-pelt"), CAPYBARA_PELT);
+		Registry.register(Registry.ITEM, new Identifier("capybara", "oak_bark"), OAK_BARK);
 		System.out.println("Hello Fabric world!");
 	}
 }
