@@ -1,5 +1,6 @@
 package net.capybara;
 
+import net.capybara.features.HotSpring;
 import net.capybara.entities.passive.CapybaraEntity;
 import net.capybara.entities.passive.CapybaraEntityFactory;
 import net.capybara.items.OakBark;
@@ -14,6 +15,14 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
 
 
 public class CapybaraMain implements ModInitializer {
@@ -25,6 +34,12 @@ public class CapybaraMain implements ModInitializer {
 			.icon(() -> new ItemStack(Items.BOWL))
 			.build();
 
+	//Features
+	private static final Feature<DefaultFeatureConfig> HOT_SPRING = Registry.register(
+			Registry.FEATURE,
+			new Identifier("capybara", "hotspring"),
+			new HotSpring(DefaultFeatureConfig::deserialize)
+	);
 
 	public static final Block OAK_WITHOUT_BARK = new LogBlock(MaterialColor.WOOD, FabricBlockSettings.of(Material.WOOD).strength(2.0f, 2.0f).build());
 
@@ -35,19 +50,31 @@ public class CapybaraMain implements ModInitializer {
 			.create(EntityCategory.CREATURE, new CapybaraEntityFactory()).size(EntityDimensions.fixed(2,1))
 			.build();
 
+
+
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 		System.out.println("Initializing Capybara-Commune...");
-
+		
+		//Items
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-meat"), CAPYBARA_MEAT);
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-pelt"), CAPYBARA_PELT);
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_bark"), OAK_BARK);
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), new BlockItem(OAK_WITHOUT_BARK, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
-		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), OAK_WITHOUT_BARK);
 		Registry.register(Registry.ENTITY_TYPE, new Identifier(CAPYBARA_NAMESPACE, "capybara_entity"), CAPYBARA_MOB);
+		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), OAK_WITHOUT_BARK);
+
+		for(Biome biome : Registry.BIOME) {
+			if(biome.getCategory() == Biome.Category.SWAMP || biome.getCategory() == Biome.Category.RIVER ) {
+				biome.addFeature(
+						GenerationStep.Feature.RAW_GENERATION,	new ConfiguredFeature<>(HOT_SPRING,new DefaultFeatureConfig()));
+			}
+
+		}
+
 		System.out.println("Completed initialization of Capybara-Commune!");
 	}
 }
