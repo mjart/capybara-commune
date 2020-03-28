@@ -39,7 +39,7 @@ public class CapybaraMain implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-meat"), CAPYBARA_MEAT);
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-pelt"), CAPYBARA_PELT);
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_bark"), OAK_BARK);
-		Registry.register(Registry.ITEM, new Identifier("tutorial", "example_block"), new BlockItem(OAK_WITHOUT_BARK_BLOCK, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
+		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), new BlockItem(OAK_WITHOUT_BARK_BLOCK, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
 
 
 		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), OAK_WITHOUT_BARK_BLOCK);

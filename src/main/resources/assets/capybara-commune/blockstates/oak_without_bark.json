@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "capybara-commune:block/oak_without_bark" }
+  }
+}
