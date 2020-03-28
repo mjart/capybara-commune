@@ -1,5 +1,7 @@
 package net.capybara;
 
+import net.capybara.entities.passive.CapybaraEntity;
+import net.capybara.entities.passive.CapybaraEntityFactory;
 import net.capybara.items.OakBark;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
@@ -7,6 +9,10 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.item.*;
+import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.EntityCategory;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -25,9 +31,11 @@ public class CapybaraMain implements ModInitializer {
 	public static final Item OAK_WITHOUT_BARK_ITEM = new OakBark(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 
 	public static final Item OAK_BARK = new OakBark(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
-
 	public static final Item CAPYBARA_MEAT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 	public static final Item CAPYBARA_PELT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
+	public static final EntityType<CapybaraEntity> CAPYBARA_MOB = FabricEntityTypeBuilder
+			.create(EntityCategory.CREATURE, new CapybaraEntityFactory()).size(EntityDimensions.fixed(2,1))
+			.build();
 
 	@Override
 	public void onInitialize() {
@@ -40,10 +48,8 @@ public class CapybaraMain implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-pelt"), CAPYBARA_PELT);
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_bark"), OAK_BARK);
 		Registry.register(Registry.ITEM, new Identifier("tutorial", "example_block"), new BlockItem(OAK_WITHOUT_BARK_BLOCK, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
-
-
 		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), OAK_WITHOUT_BARK_BLOCK);
-
+		Registry.register(Registry.ENTITY_TYPE, new Identifier(CAPYBARA_NAMESPACE, "capybara_entity"), CAPYBARA_MOB);
 		System.out.println("Completed initialization of Capybara-Commune!");
 	}
 }

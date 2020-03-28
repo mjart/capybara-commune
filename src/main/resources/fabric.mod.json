@@ -22,7 +22,10 @@
   "entrypoints": {
     "main": [
       "net.capybara.CapybaraMain"
-    ]
+    ],
+    "client": [
+      "net.capybara.CapybaraMainClient"
+            ]
   },
   "mixins": [
     "capybara-commune.mixins.json"
