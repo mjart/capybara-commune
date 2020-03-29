@@ -1,34 +1,27 @@
 package net.capybara.entities.passive;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.util.Pair;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CapybaraEntity extends PigEntity {
+public class CapybaraEntity extends SheepEntity {
     public static final EntityAttribute ORIGINAL_FOLLOW_RANGE = (new ClampedEntityAttribute((EntityAttribute)null, "capybara.originalFollowRange", 32.0D, 0.0D, 2048.0D)).setName("Original Follow Range");
     public static final EntityAttribute PACIFIED_COUNT = (new ClampedEntityAttribute((EntityAttribute)null, "capybara.pacifiedCount", 0, 0.0D, 2048.0D)).setName("Pacified by N mobs");
 
     public float pacifyRadius = 10f;
     private List<HostileEntity> pacifiedEntities = new ArrayList<>();
 
-    public CapybaraEntity(EntityType<? extends PigEntity> entityType, World world) {
+    public CapybaraEntity(EntityType<? extends SheepEntity> entityType, World world) {
         super(entityType, world);
     }
-
 
     @Override
     protected void mobTick() {
@@ -84,12 +77,22 @@ public class CapybaraEntity extends PigEntity {
         }
     }
 
-    private EntityAttributeInstance getOrRegisterAttribute(AbstractEntityAttributeContainer attributes, EntityAttribute attribute){
+    private EntityAttributeInstance getOrRegisterAttribute(AbstractEntityAttributeContainer attributes, EntityAttribute attribute) {
         EntityAttributeInstance instance = attributes.get(attribute);
-        if(instance != null){
+        if (instance != null) {
             return instance;
         }
 
         return attributes.register(attribute);
+    }
+
+    @Override
+    protected void initGoals() {
+        super.initGoals();
+    }
+
+    @Override
+    public void dropItems() {
+        return;
     }
 }
