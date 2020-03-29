@@ -1,10 +1,14 @@
 package net.capybara.entities.passive;
 
+import net.fabricmc.fabric.api.event.server.ServerStopCallback;
+import net.fabricmc.fabric.impl.client.particle.FabricParticleManager;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
@@ -12,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CapybaraEntity extends SheepEntity {
+public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
     public static final EntityAttribute ORIGINAL_FOLLOW_RANGE = (new ClampedEntityAttribute((EntityAttribute)null, "capybara.originalFollowRange", 32.0D, 0.0D, 2048.0D)).setName("Original Follow Range");
     public static final EntityAttribute PACIFIED_COUNT = (new ClampedEntityAttribute((EntityAttribute)null, "capybara.pacifiedCount", 0, 0.0D, 2048.0D)).setName("Pacified by N mobs");
 
@@ -21,6 +25,8 @@ public class CapybaraEntity extends SheepEntity {
 
     public CapybaraEntity(EntityType<? extends SheepEntity> entityType, World world) {
         super(entityType, world);
+
+        ServerStopCallback.EVENT.register(this);
     }
 
     @Override
@@ -49,8 +55,11 @@ public class CapybaraEntity extends SheepEntity {
                 EntityAttributeInstance followRangeAttribute = entity.getAttributes().get(EntityAttributes.FOLLOW_RANGE);
                 if (followRangeAttribute != null) {
                     double originalFollowRange = followRangeAttribute.getBaseValue();
-                    getOrRegisterAttribute(entity.getAttributes(), ORIGINAL_FOLLOW_RANGE).setBaseValue(originalFollowRange);
-                    getOrRegisterAttribute(entity.getAttributes(), PACIFIED_COUNT).setBaseValue(1+getOrRegisterAttribute(entity.getAttributes(), PACIFIED_COUNT).getBaseValue());
+                    if(originalFollowRange > 0.0f) {
+                        getOrRegisterAttribute(entity.getAttributes(), ORIGINAL_FOLLOW_RANGE).setBaseValue(originalFollowRange);
+                    }
+                    double pacifyCount = 1 + getOrRegisterAttribute(entity.getAttributes(), PACIFIED_COUNT).getBaseValue();
+                    getOrRegisterAttribute(entity.getAttributes(), PACIFIED_COUNT).setBaseValue(pacifyCount);
                     followRangeAttribute.setBaseValue(0.0f);
                     pacifiedEntities.add(entity);
                 }
@@ -94,5 +103,13 @@ public class CapybaraEntity extends SheepEntity {
     @Override
     public void dropItems() {
         return;
+    }
+
+    @Override
+    public void onStopServer(MinecraftServer minecraftServer) {
+        for(HostileEntity entity : pacifiedEntities){
+            decreasePacifyCount(entity);
+        }
+        pacifiedEntities.clear();
     }
 }
