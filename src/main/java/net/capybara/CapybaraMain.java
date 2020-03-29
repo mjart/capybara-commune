@@ -1,5 +1,6 @@
 package net.capybara;
 
+import nerdhub.foml.obj.OBJLoader;
 import net.capybara.entities.passive.CapybaraEntity;
 import net.capybara.entities.passive.CapybaraEntityFactory;
 import net.capybara.items.OakBark;
@@ -28,7 +29,6 @@ public class CapybaraMain implements ModInitializer {
 			.icon(() -> new ItemStack(Items.BOWL))
 			.build();
 
-
 	public static final Block OAK_WITHOUT_BARK = new LogBlock(MaterialColor.ORANGE, FabricBlockSettings.of(Material.WOOD).build());
 
 	public static final Item OAK_BARK = new OakBark(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
@@ -44,7 +44,9 @@ public class CapybaraMain implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 		System.out.println("Initializing Capybara-Commune...");
-
+		System.out.println("Registering FOML..");
+		OBJLoader.INSTANCE.registerDomain("capybara-commune");
+		System.out.println("FOML Registered");
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-meat"), CAPYBARA_MEAT);
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-pelt"), CAPYBARA_PELT);
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_bark"), OAK_BARK);
