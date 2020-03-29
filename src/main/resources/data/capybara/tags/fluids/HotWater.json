@@ -2,7 +2,7 @@
 	"replace": false,
 	"values":
 	[
-		"your_mod_id:hotwater",
-		"your_mod_id:flowing_hotwater"
+		"capybara:hotwater",
+		"capybara:flowing_hotwater"
 	]
 }

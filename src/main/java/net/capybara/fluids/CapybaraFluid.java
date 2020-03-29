@@ -13,6 +13,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.WorldView;
 
 public abstract class CapybaraFluid extends BaseFluid {
+
+
+
     /**
      * @return is the given fluid an instance of this fluid?
      */
@@ -41,6 +44,7 @@ public abstract class CapybaraFluid extends BaseFluid {
         final BlockEntity blockEntity = state.getBlock().hasBlockEntity() ? world.getBlockEntity(pos) : null;
         Block.dropStacks(state, world.getWorld(), pos, blockEntity);
     }
+
 
     /**
      * Lava returns true if its FluidState is above a certain height and the

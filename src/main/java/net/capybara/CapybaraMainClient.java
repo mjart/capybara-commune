@@ -2,6 +2,7 @@ package net.capybara;
 
 import net.capybara.entities.passive.CapybaraRenderer;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
@@ -9,6 +10,7 @@ import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.fluid.BaseFluid;
@@ -30,7 +32,10 @@ public class CapybaraMainClient implements ClientModInitializer {
         EntityRendererRegistry.INSTANCE.register(CapybaraMain.CAPYBARA_MOB,
                 (entityRenderDispatcher, context) -> new CapybaraRenderer(entityRenderDispatcher));
 
-        setupFluidRendering(CapybaraMain.STILL_HOTWATER,CapybaraMain.FLOWING_HOTWATER, new Identifier("capybara","hotwater"),0xbcb8db);
+        //TO DO Properly initialize renderer
+        setupFluidRendering(CapybaraMain.STILL_HOTWATER,CapybaraMain.FLOWING_HOTWATER, new Identifier("capybara","hotwater"),0x313e57);
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), CapybaraMain.STILL_HOTWATER, CapybaraMain.FLOWING_HOTWATER);
+
 
         System.out.println("Completed initialization of Capybara-Commune!");
 
@@ -88,6 +93,7 @@ public class CapybaraMainClient implements ClientModInitializer {
             {
                 return color;
             }
+
         };
 
         FluidRenderHandlerRegistry.INSTANCE.register(stillHotwater, renderHandler);

@@ -51,7 +51,7 @@ public class CapybaraMain implements ModInitializer {
 	public static final Item OAK_BARK = new OakBark(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 	public static final Item CAPYBARA_MEAT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 	public static final Item CAPYBARA_PELT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
-	public static Item HOTWATER_BUCKET;
+	public static  Item HOTWATER_BUCKET  = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));;
 
 	public static final EntityType<CapybaraEntity> CAPYBARA_MOB = FabricEntityTypeBuilder
 			.create(EntityCategory.CREATURE, new CapybaraEntityFactory()).size(EntityDimensions.fixed(2,1))
@@ -72,7 +72,6 @@ public class CapybaraMain implements ModInitializer {
 		HOTWATER_BUCKET = Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "hotwater_bucket"), new BucketItem(STILL_HOTWATER, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
 
-
 		//Items
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-meat"), CAPYBARA_MEAT);
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-pelt"), CAPYBARA_PELT);
@@ -80,17 +79,8 @@ public class CapybaraMain implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), new BlockItem(OAK_WITHOUT_BARK, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
 		Registry.register(Registry.ENTITY_TYPE, new Identifier(CAPYBARA_NAMESPACE, "capybara_entity"), CAPYBARA_MOB);
 		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), OAK_WITHOUT_BARK);
-		HOTWATER = Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "acid"), new FluidBlock(STILL_HOTWATER, FabricBlockSettings.copy(Blocks.WATER).build()){});
-
-		//for(Biome biome : Registry.BIOME) {
-		//	if(biome.getCategory() == Biome.Category.SWAMP || biome.getCategory() == Biome.Category.RIVER ) {
-		//		biome.addFeature(
-		//				GenerationStep.Feature.RAW_GENERATION,	new ConfiguredFeature<>(HOT_SPRING,new DefaultFeatureConfig()));
-		//	}
-
-		//}
-
-		HOTWATER_LAKE = Registry.register(Registry.FEATURE, new Identifier(CAPYBARA_NAMESPACE, "acid_lake"), new LakeFeature(SingleStateFeatureConfig::deserialize));
+		HOTWATER = Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "hotwater"), new FluidBlock(STILL_HOTWATER, FabricBlockSettings.copy(Blocks.WATER).build()){});
+		HOTWATER_LAKE = Registry.register(Registry.FEATURE, new Identifier(CAPYBARA_NAMESPACE, "hot_water"), new LakeFeature(SingleStateFeatureConfig::deserialize));
 
 		// generate in swamps, similar to water lakes, but with a chance of 40 (the higher the number, the lower the generation chance)
 		Biomes.SWAMP.addFeature(
