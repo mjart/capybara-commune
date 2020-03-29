@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "":    { "model": "capybara:block/hotspring_brick" }
+  }
+}

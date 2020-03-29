@@ -37,18 +37,19 @@ public class CapybaraMain implements ModInitializer {
 			.build();
 
 //Features
-	private static final Feature<DefaultFeatureConfig> HOT_SPRING = Registry.register(
-			Registry.FEATURE,
-			new Identifier("capybara", "hotspring"),
-			new HotSpring(DefaultFeatureConfig::deserialize)
-	);
+	//private static final Feature<DefaultFeatureConfig> HOT_SPRING = Registry.register(
+	//		Registry.FEATURE,
+	//		new Identifier("capybara", "hotspring"),
+	//		new HotSpring(DefaultFeatureConfig::deserialize)
+	//);
 
 	public static final Block OAK_WITHOUT_BARK = new LogBlock(MaterialColor.WOOD, FabricBlockSettings.of(Material.WOOD).strength(2.0f, 2.0f).build());
+	public static final Block HOTSPRING_BRICK = new Block(FabricBlockSettings.of(Material.STONE).strength(2.0f, 2.0f).build());
 
 	public static BaseFluid STILL_HOTWATER;
 	public static BaseFluid FLOWING_HOTWATER;
 	public static Block HOTWATER;
-	public static LakeFeature HOTWATER_LAKE;
+	public static HotSpring HOTWATER_LAKE;
 
 	public static final Item OAK_BARK = new OakBark(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 	public static final Item CAPYBARA_MEAT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
@@ -82,8 +83,9 @@ public class CapybaraMain implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), new BlockItem(OAK_WITHOUT_BARK, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
 		Registry.register(Registry.ENTITY_TYPE, new Identifier(CAPYBARA_NAMESPACE, "capybara_entity"), CAPYBARA_MOB);
 		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), OAK_WITHOUT_BARK);
+		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "hotspring_brick"), HOTSPRING_BRICK);
 		HOTWATER = Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "hotwater"), new FluidBlock(STILL_HOTWATER, FabricBlockSettings.copy(Blocks.WATER).build()){});
-		HOTWATER_LAKE = Registry.register(Registry.FEATURE, new Identifier(CAPYBARA_NAMESPACE, "hot_water"), new LakeFeature(SingleStateFeatureConfig::deserialize));
+		HOTWATER_LAKE = Registry.register(Registry.FEATURE, new Identifier(CAPYBARA_NAMESPACE, "hot_water"), new HotSpring(SingleStateFeatureConfig::deserialize));
 
 		// generate in swamps, similar to water lakes, but with a chance of 40 (the higher the number, the lower the generation chance)
 		Biomes.SWAMP.addFeature(
