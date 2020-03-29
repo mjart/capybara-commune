@@ -1,0 +1,8 @@
+{
+	"replace": false,
+	"values":
+	[
+		"capybara:hotwater",
+		"capybara:flowing_hotwater"
+	]
+}
