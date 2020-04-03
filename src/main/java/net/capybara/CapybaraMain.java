@@ -52,7 +52,7 @@ public class CapybaraMain implements ModInitializer {
 	public static final Item OAK_BARK = new OakBark(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 	public static final Item CAPYBARA_MEAT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 	public static final Item CAPYBARA_PELT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
-	public static  Item HOTWATER_BUCKET  = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));;
+	public static  Item HOTWATER_BUCKET  = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 
 	public static final EntityType<CapybaraEntity> CAPYBARA_MOB = FabricEntityTypeBuilder
 			.create(EntityCategory.CREATURE, new CapybaraEntityFactory()).size(EntityDimensions.fixed(2,1))
@@ -81,6 +81,7 @@ public class CapybaraMain implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), new BlockItem(OAK_WITHOUT_BARK, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
 		Registry.register(Registry.ENTITY_TYPE, new Identifier(CAPYBARA_NAMESPACE, "capybara_entity"), CAPYBARA_MOB);
 		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), OAK_WITHOUT_BARK);
+		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara_spawn_egg"), new SpawnEggItem(CapybaraMain.CAPYBARA_MOB, 0x0DA70B, 0x73420E, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
 		HOTWATER = Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "hotwater"), new FluidBlock(STILL_HOTWATER, FabricBlockSettings.copy(Blocks.WATER).build()){});
 		HOTWATER_LAKE = Registry.register(Registry.FEATURE, new Identifier(CAPYBARA_NAMESPACE, "hot_water"), new LakeFeature(SingleStateFeatureConfig::deserialize));
 
