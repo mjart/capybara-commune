@@ -1,5 +1,7 @@
 package net.capybara.entities.passive;
 
+import net.capybara.CapybaraMain;
+import net.capybara.CapybaraMainClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -14,6 +16,6 @@ public class CapybaraRenderer extends MobEntityRenderer<CapybaraEntity, Capybara
 
     @Override
     public Identifier getTexture(CapybaraEntity CapybaraEntity) {
-        return new Identifier("capybara:textures/item/capybara_pelt");
+        return new Identifier(CapybaraMain.CAPYBARA_NAMESPACE, "textures/entity/capybara.png");
     }
 }
