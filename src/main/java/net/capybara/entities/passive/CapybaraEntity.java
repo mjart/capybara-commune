@@ -1,5 +1,6 @@
 package net.capybara.entities.passive;
 
+import net.capybara.entities.ai.EatBarkGoal;
 import net.fabricmc.fabric.api.event.server.ServerStopCallback;
 import net.fabricmc.fabric.impl.client.particle.FabricParticleManager;
 import net.minecraft.client.MinecraftClient;
