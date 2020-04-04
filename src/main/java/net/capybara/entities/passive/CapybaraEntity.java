@@ -10,6 +10,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import java.util.ArrayList;
@@ -111,6 +112,11 @@ public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
     @Override
     public void dropItems() {
         return;
+    }
+
+    @Override
+    public Identifier getLootTableId() {
+        return this.getType().getLootTableId();
     }
 
     @Override
