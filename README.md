@@ -1,4 +1,4 @@
-# Fabric Example Mod
+# Fabric ModFest entry: Chill Capybara Commune!
 
 ## Setup
 

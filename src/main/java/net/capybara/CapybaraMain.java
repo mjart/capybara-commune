@@ -57,7 +57,7 @@ public class CapybaraMain implements ModInitializer {
 	public static  Item HOTWATER_BUCKET  = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 
 	public static final EntityType<CapybaraEntity> CAPYBARA_MOB = FabricEntityTypeBuilder
-			.create(EntityCategory.CREATURE, new CapybaraEntityFactory()).size(EntityDimensions.fixed(2,1))
+			.create(EntityCategory.CREATURE, new CapybaraEntityFactory()).size(EntityDimensions.fixed(1,1))
 			.build();
 
 	@Override

@@ -1,5 +1,6 @@
 package net.capybara.entities.passive;
 
+import net.capybara.entities.ai.EatBarkGoal;
 import net.fabricmc.fabric.api.event.server.ServerStopCallback;
 import net.fabricmc.fabric.impl.client.particle.FabricParticleManager;
 import net.minecraft.client.MinecraftClient;
@@ -30,6 +31,7 @@ public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
     public CapybaraEntity(EntityType<? extends SheepEntity> entityType, World world) {
         super(entityType, world);
 
+        //TODO: I'm 90% sure this will create a memory leak. But hey it's a mod jam :)
         ServerStopCallback.EVENT.register(this);
     }
 
@@ -90,7 +92,7 @@ public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
         }
     }
 
-    private EntityAttributeInstance getOrRegisterAttribute(AbstractEntityAttributeContainer attributes, EntityAttribute attribute) {
+    private static EntityAttributeInstance getOrRegisterAttribute(AbstractEntityAttributeContainer attributes, EntityAttribute attribute) {
         EntityAttributeInstance instance = attributes.get(attribute);
         if (instance != null) {
             return instance;
