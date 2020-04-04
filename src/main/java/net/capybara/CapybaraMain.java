@@ -16,6 +16,7 @@ import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -56,6 +57,9 @@ public class CapybaraMain implements ModInitializer {
 	public static final Item CAPYBARA_PELT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 	public static  Item HOTWATER_BUCKET  = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 
+	public static final Identifier CAPYBARA_SOUND_ID = new Identifier("capybara:capybara_cool_sound");
+	public static SoundEvent CAPYBARA_SOUND_EVENT = new SoundEvent(CAPYBARA_SOUND_ID);
+
 	public static final EntityType<CapybaraEntity> CAPYBARA_MOB = FabricEntityTypeBuilder
 			.create(EntityCategory.CREATURE, new CapybaraEntityFactory()).size(EntityDimensions.fixed(1,1))
 			.build();
@@ -75,6 +79,9 @@ public class CapybaraMain implements ModInitializer {
 		STILL_HOTWATER = Registry.register(Registry.FLUID, new Identifier(CAPYBARA_NAMESPACE, "hotwater"), new HotWaterFluid.Still());
 		FLOWING_HOTWATER = Registry.register(Registry.FLUID, new Identifier(CAPYBARA_NAMESPACE, "flowing_hotwater"), new HotWaterFluid.Flowing());
 		HOTWATER_BUCKET = Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "hotwater_bucket"), new BucketItem(STILL_HOTWATER, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
+		//Sounds
+		Registry.register(Registry.SOUND_EVENT, CAPYBARA_SOUND_ID, CAPYBARA_SOUND_EVENT);
 
 		//Items
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-meat"), CAPYBARA_MEAT);

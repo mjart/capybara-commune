@@ -1,5 +1,6 @@
 package net.capybara.entities.passive;
 
+import net.capybara.CapybaraMain;
 import net.capybara.entities.ai.EatBarkGoal;
 import net.fabricmc.fabric.api.event.server.ServerStopCallback;
 import net.fabricmc.fabric.impl.client.particle.FabricParticleManager;
@@ -10,6 +11,9 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import java.util.ArrayList;
@@ -36,11 +40,23 @@ public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
     }
 
     @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return  CapybaraMain.CAPYBARA_SOUND_EVENT;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return CapybaraMain.CAPYBARA_SOUND_EVENT;
+    }
+
+    @Override
     protected void mobTick() {
         super.mobTick();
 
         if(!isAlive())
             return;
+
+        //world.playSound(null, this.getBlockPos(), CapybaraMain.CAPYBARA_SOUND_EVENT, SoundCategory.NEUTRAL, 1f, 1f);
 
         Box aroundEntity = new Box(this.getPos(), this.getPos());
         aroundEntity = aroundEntity.expand(pacifyRadius);
