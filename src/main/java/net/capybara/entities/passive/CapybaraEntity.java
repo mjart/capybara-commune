@@ -11,9 +11,8 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import java.util.ArrayList;
@@ -55,8 +54,6 @@ public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
 
         if(!isAlive())
             return;
-
-        //world.playSound(null, this.getBlockPos(), CapybaraMain.CAPYBARA_SOUND_EVENT, SoundCategory.NEUTRAL, 1f, 1f);
 
         Box aroundEntity = new Box(this.getPos(), this.getPos());
         aroundEntity = aroundEntity.expand(pacifyRadius);
@@ -127,6 +124,11 @@ public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
     @Override
     public void dropItems() {
         return;
+    }
+
+    @Override
+    public Identifier getLootTableId() {
+        return this.getType().getLootTableId();
     }
 
     @Override
