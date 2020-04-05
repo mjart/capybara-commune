@@ -39,8 +39,13 @@ public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
     }
 
     @Override
+    protected SoundEvent getDeathSound() {
+        return CapybaraMain.CAPYBARA_DIE_SOUND_EVENT;
+    }
+
+    @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return  CapybaraMain.CAPYBARA_SOUND_EVENT;
+        return  CapybaraMain.CAPYBARA_HURT_SOUND_EVENT;
     }
 
     @Override

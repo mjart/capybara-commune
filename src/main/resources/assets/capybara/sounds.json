@@ -3,5 +3,15 @@
     "sounds": [
       "capybara:capybara_cool_sound"
     ]
+  },
+  "capybara_hurt": {
+    "sounds": [
+      "capybara:capybara_hurt"
+    ]
+  },
+  "capybara_die": {
+    "sounds": [
+      "capybara:capybara_die"
+    ]
   }
 }
