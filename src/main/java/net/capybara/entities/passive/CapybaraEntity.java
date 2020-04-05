@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.sound.SoundEvent;
@@ -36,6 +37,14 @@ public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
 
         //TODO: I'm 90% sure this will create a memory leak. But hey it's a mod jam :)
         ServerStopCallback.EVENT.register(this);
+    }
+
+    @Override
+    public SheepEntity createChild(PassiveEntity passiveEntity) {
+        CapybaraEntity capybaraEntity = (CapybaraEntity)passiveEntity;
+        CapybaraEntity capybaraEntity2 = (CapybaraEntity)CapybaraMain.CAPYBARA_MOB.create(this.world);
+        return capybaraEntity2;
+
     }
 
     @Override

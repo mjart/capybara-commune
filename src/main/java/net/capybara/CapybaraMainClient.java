@@ -13,6 +13,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.SpriteAtlasTexture;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.BaseFluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.resource.ResourceManager;
@@ -91,6 +92,7 @@ public class CapybaraMainClient implements ClientModInitializer {
             @Override
             public int getFluidColor(BlockRenderView view, BlockPos pos, FluidState state)
             {
+
                 return color;
             }
 

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": 
+    {
+      "item": "capybara:capybara-meat"
+    }
+  ,
+  "result": "minecraft:cooked_mutton",
+  "experience": 0.35,
+  "cookingtime": 200
+}
