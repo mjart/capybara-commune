@@ -66,13 +66,13 @@ public abstract class HotWaterFluid extends WaterFluid {
     }
 
     protected boolean isInfinite() {
-        return true;
+        return false;
     }
 
-    protected void beforeBreakingBlock(IWorld world, BlockPos pos, BlockState state) {
-        BlockEntity blockEntity = state.getBlock().hasBlockEntity() ? world.getBlockEntity(pos) : null;
-        Block.dropStacks(state, world.getWorld(), pos, blockEntity);
-    }
+   // protected void beforeBreakingBlock(IWorld world, BlockPos pos, BlockState state) {
+   //     BlockEntity blockEntity = state.getBlock().hasBlockEntity() ? world.getBlockEntity(pos) : null;
+   //     Block.dropStacks(state, world.getWorld(), pos, blockEntity);
+   // }
 
     public int method_15733(WorldView worldView) {
         return 4;

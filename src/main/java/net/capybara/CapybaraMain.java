@@ -90,14 +90,15 @@ public class CapybaraMain implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), new BlockItem(OAK_WITHOUT_BARK, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
 		Registry.register(Registry.ENTITY_TYPE, new Identifier(CAPYBARA_NAMESPACE, "capybara_entity"), CAPYBARA_MOB);
 		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), OAK_WITHOUT_BARK);
-		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-spawn-egg"), new SpawnEggItem(CapybaraMain.CAPYBARA_MOB, 0x0DA70B, 0x73420E, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
+		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-spawn-egg"), new SpawnEggItem(CapybaraMain.CAPYBARA_MOB, 0xffffff, 0xffffff, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
 		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "hotspring_brick"), HOTSPRING_BRICK);
+		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "hotspring_brick"), new BlockItem(HOTSPRING_BRICK, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
 
 		HOTWATER = Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "hotwater"), new FluidBlock(STILL_HOTWATER, FabricBlockSettings.copy(Blocks.WATER).build()){});
 		HOTWATER_LAKE = Registry.register(Registry.FEATURE, new Identifier(CAPYBARA_NAMESPACE, "hot_water"), new HotSpring(SingleStateFeatureConfig::deserialize));
 
 		// generate in Savanna, similar to water lakes, but with a chance of 40 (the higher the number, the lower the generation chance)
-		Biomes.SAVANNA.addFeature(
+		Biomes.SWAMP.addFeature(
 				GenerationStep.Feature.LOCAL_MODIFICATIONS,
 				HOTWATER_LAKE.configure(new SingleStateFeatureConfig(HOTWATER.getDefaultState()))
 						.createDecoratedFeature(Decorator.WATER_LAKE.configure(new ChanceDecoratorConfig(10)))

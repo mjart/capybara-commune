@@ -4,6 +4,7 @@
   "item.capybara.oak_bark": "Oak bark",
   "item.capybara.oak_without_bark": "Cleaned Oak Log",
   "block.capybara.oak_without_bark": "Cleaned Oak Log",
-  "itemGroup.capybara.general": "Capybara Commune"
-
+  "itemGroup.capybara.general": "Capybara Commune",
+  "item.capybara.capybara-spawn-egg": "Capybara Egg",
+  "block.capybara.hotspring_brick": "Hotspring Brick"
 }
