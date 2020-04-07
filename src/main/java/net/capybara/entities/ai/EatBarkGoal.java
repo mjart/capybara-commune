@@ -4,6 +4,8 @@ package net.capybara.entities.ai;
 
 import java.util.Iterator;
 import java.util.Random;
+
+import net.capybara.CapybaraMain;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.tag.BlockTags;
@@ -13,17 +15,52 @@ import net.minecraft.util.math.MathHelper;
 public class EatBarkGoal extends Goal {
     private double searchRadius = 10.0D;
     private final MobEntityWithAi mob;
+    private BlockPos pos = null;
+    private int timer = 0;
 
     public EatBarkGoal(MobEntityWithAi mob) {
         this.mob = mob;
     }
 
+    @Override
+    public boolean shouldContinue() {
+        return pos != null ;
+    }
+
+    @Override
+    public boolean canStop() {
+        return pos == null;
+    }
+
     public boolean canStart() {
-        return this.mob.onGround && !this.mob.world.getBlockState(new BlockPos(this.mob)).matches(BlockTags.LOGS);
+        return this.mob.onGround && pos == null ;
           }
 
+    @Override
+    public void tick() {
+        timer--;
+        if(timer < 0) timer = 0;
+        if (pos != null&&timer == 0) {
+            Random random = new Random();
+            this.mob.getMoveControl().moveTo(
+                    (double)pos.getX(),
+                    (double)pos.getY(),
+                    (double)pos.getZ(),
+                    5.0D);
+            if(mob.getBlockPos().isWithinDistance(pos,3)) {
+                if(this.mob.world.getBlockState(pos).matches(BlockTags.LOGS))
+                {
+                    this.mob.world.setBlockState(pos, CapybaraMain.OAK_WITHOUT_BARK.getDefaultState());
+                }
+                timer = 500;
+                System.out.println("Capybara, Found oak");
+                pos = null;
+            }
+        }
+    }
+
     public void start() {
-        BlockPos blockPos = null;
+
         Iterable<BlockPos> iterable = BlockPos.iterate(
                 MathHelper.floor(this.mob.getX() - searchRadius),   //Min X
                 MathHelper.floor(this.mob.getY() - searchRadius),   //Min Y
@@ -37,19 +74,12 @@ public class EatBarkGoal extends Goal {
         while(iter.hasNext()) {
             BlockPos blockPos2 = (BlockPos)iter.next();
             if (this.mob.world.getBlockState(blockPos2).matches(BlockTags.LOGS) && !this.mob.world.getBlockState(blockPos2).getBlock().getTranslationKey().equalsIgnoreCase("block.capybara.oak_without_bark")) {
-                blockPos = blockPos2;
+                pos = blockPos2;
                 break;
             }
         }
 
-        if (blockPos != null) {
-            Random random = new Random();
-            this.mob.getMoveControl().moveTo(
-                    (double)blockPos.getX(),
-                    (double)blockPos.getY(),
-                    (double)blockPos.getZ(),
-                    10.0D);
-        }
+
 
     }
 }

@@ -1,5 +1,7 @@
 package net.capybara.entities.passive;
 
+import net.capybara.CapybaraMain;
+import net.capybara.entities.ai.EatBarkGoal;
 import net.fabricmc.fabric.api.event.server.ServerStopCallback;
 import net.fabricmc.fabric.impl.client.particle.FabricParticleManager;
 import net.minecraft.client.MinecraftClient;
@@ -7,8 +9,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import java.util.ArrayList;
@@ -30,7 +35,31 @@ public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
     public CapybaraEntity(EntityType<? extends SheepEntity> entityType, World world) {
         super(entityType, world);
 
+        //TODO: I'm 90% sure this will create a memory leak. But hey it's a mod jam :)
         ServerStopCallback.EVENT.register(this);
+    }
+
+    @Override
+    public SheepEntity createChild(PassiveEntity passiveEntity) {
+        CapybaraEntity capybaraEntity = (CapybaraEntity)passiveEntity;
+        CapybaraEntity capybaraEntity2 = (CapybaraEntity)CapybaraMain.CAPYBARA_MOB.create(this.world);
+        return capybaraEntity2;
+
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return CapybaraMain.CAPYBARA_DIE_SOUND_EVENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return  CapybaraMain.CAPYBARA_HURT_SOUND_EVENT;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return CapybaraMain.CAPYBARA_SOUND_EVENT;
     }
 
     @Override
@@ -90,7 +119,7 @@ public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
         }
     }
 
-    private EntityAttributeInstance getOrRegisterAttribute(AbstractEntityAttributeContainer attributes, EntityAttribute attribute) {
+    private static EntityAttributeInstance getOrRegisterAttribute(AbstractEntityAttributeContainer attributes, EntityAttribute attribute) {
         EntityAttributeInstance instance = attributes.get(attribute);
         if (instance != null) {
             return instance;
@@ -109,6 +138,11 @@ public class CapybaraEntity extends SheepEntity implements ServerStopCallback {
     @Override
     public void dropItems() {
         return;
+    }
+
+    @Override
+    public Identifier getLootTableId() {
+        return this.getType().getLootTableId();
     }
 
     @Override

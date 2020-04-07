@@ -9,9 +9,9 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class CapybaraRenderer extends MobEntityRenderer<CapybaraEntity, CapybaraEntityModel<CapybaraEntity>> {
+public class CapybaraRenderer extends MobEntityRenderer<CapybaraEntity, CapybaraEntityModel> {
     public CapybaraRenderer(EntityRenderDispatcher renderManager) {
-        super(renderManager, new CapybaraEntityModel<>(), 1);
+        super(renderManager, new CapybaraEntityModel(), 1);
     }
 
     @Override

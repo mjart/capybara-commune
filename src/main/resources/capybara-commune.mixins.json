@@ -4,6 +4,7 @@
   "package": "net.capybara.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+  	"SwampMixin"
   ],
   "client": [
     "MainMixin"
