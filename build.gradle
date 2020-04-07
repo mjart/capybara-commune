@@ -10,12 +10,7 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
-repositories {
-	maven {
-		name = "OnyxStudios"
-		url = "https://maven.abusedmaster.xyz"
-	}
-}
+
 
 dependencies {
 	//to change the versions see the gradle.properties file
@@ -29,10 +24,7 @@ dependencies {
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 
-	modCompile "com.github.OnyxStudios:FOML:1.2.0"
 
-	// Includes FOML as a Jar in Jar dependency, Optional
-	include "com.github.OnyxStudios:FOML:1.2.0"
 }
 
 processResources {
