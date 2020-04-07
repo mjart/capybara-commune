@@ -19,7 +19,7 @@ public abstract class SwampMixin extends Biome {
     @Inject(at = @At("RETURN"), method = "<init>()V")
     private void init(CallbackInfo info) {
         // EntityType<?> type, int weight, int minGroupSize, int maxGroupSize
-        this.addSpawn(EntityCategory.CREATURE, new Biome.SpawnEntry(CapybaraMain.CAPYBARA_MOB, 5, 5, 15 ));
+        this.addSpawn(EntityCategory.CREATURE, new Biome.SpawnEntry(CapybaraMain.CAPYBARA_MOB, 5, 3, 8 ));
 
         System.out.println("Mixed in spawning of capybara's in the swamp!");
     }

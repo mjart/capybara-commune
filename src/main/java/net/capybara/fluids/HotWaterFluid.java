@@ -30,7 +30,7 @@ import net.minecraft.world.WorldView;
 
 import java.util.Random;
 
-public abstract class HotWaterFluid extends BaseFluid {
+public abstract class HotWaterFluid extends WaterFluid {
 
     public HotWaterFluid() {
     }

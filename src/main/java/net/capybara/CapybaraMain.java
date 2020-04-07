@@ -1,6 +1,5 @@
 package net.capybara;
 
-import nerdhub.foml.obj.OBJLoader;
 import net.capybara.features.HotSpring;
 import net.capybara.entities.passive.CapybaraEntity;
 import net.capybara.entities.passive.CapybaraEntityFactory;
@@ -53,10 +52,8 @@ public class CapybaraMain implements ModInitializer {
 	public static Block HOTWATER;
 	public static HotSpring HOTWATER_LAKE;
 
-	public static final Item OAK_BARK = new OakBark(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 	public static final Item CAPYBARA_MEAT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 	public static final Item CAPYBARA_PELT = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
-	public static  Item HOTWATER_BUCKET  = new Item(new Item.Settings().group(CapybaraMain.CAPYBARA_ITEM_GROUP));
 
 	public static final Identifier CAPYBARA_SOUND_ID = new Identifier("capybara:capybara_cool_sound");
 	public static final Identifier CAPYBARA_HURT_SOUND_ID = new Identifier("capybara:capybara_hurt");
@@ -78,14 +75,9 @@ public class CapybaraMain implements ModInitializer {
 		// Proceed with mild caution.
 		System.out.println("Initializing Capybara-Commune...");
 
-		System.out.println("Registering FOML..");
-		OBJLoader.INSTANCE.registerDomain("capybara-commune");
-		System.out.println("FOML Registered");
-
 		//Fluids
 		Registry.register(Registry.FLUID, new Identifier(CAPYBARA_NAMESPACE, "hotwater"), STILL_HOTWATER);
 		Registry.register(Registry.FLUID, new Identifier(CAPYBARA_NAMESPACE, "flowing_hotwater"), FLOWING_HOTWATER);
-		HOTWATER_BUCKET = Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "hotwater_bucket"), new BucketItem(STILL_HOTWATER, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
 		//Sounds
 		Registry.register(Registry.SOUND_EVENT, CAPYBARA_SOUND_ID, CAPYBARA_SOUND_EVENT);
@@ -95,11 +87,10 @@ public class CapybaraMain implements ModInitializer {
 		//Items
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-meat"), CAPYBARA_MEAT);
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-pelt"), CAPYBARA_PELT);
-		//Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_bark"), OAK_BARK);
 		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), new BlockItem(OAK_WITHOUT_BARK, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
 		Registry.register(Registry.ENTITY_TYPE, new Identifier(CAPYBARA_NAMESPACE, "capybara_entity"), CAPYBARA_MOB);
 		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "oak_without_bark"), OAK_WITHOUT_BARK);
-		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara_spawn_egg"), new SpawnEggItem(CapybaraMain.CAPYBARA_MOB, 0x0DA70B, 0x73420E, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
+		Registry.register(Registry.ITEM, new Identifier(CAPYBARA_NAMESPACE, "capybara-spawn-egg"), new SpawnEggItem(CapybaraMain.CAPYBARA_MOB, 0x0DA70B, 0x73420E, new Item.Settings().group(CAPYBARA_ITEM_GROUP)));
 		Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "hotspring_brick"), HOTSPRING_BRICK);
 
 		HOTWATER = Registry.register(Registry.BLOCK, new Identifier(CAPYBARA_NAMESPACE, "hotwater"), new FluidBlock(STILL_HOTWATER, FabricBlockSettings.copy(Blocks.WATER).build()){});

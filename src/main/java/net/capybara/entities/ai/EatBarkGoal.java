@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
 public class EatBarkGoal extends Goal {
-    private double searchRadius = 10.0D;
+    private double searchRadius = 5.0D;
     private final MobEntityWithAi mob;
     private BlockPos pos = null;
     private int timer = 0;
@@ -46,14 +46,13 @@ public class EatBarkGoal extends Goal {
                     (double)pos.getX(),
                     (double)pos.getY(),
                     (double)pos.getZ(),
-                    5.0D);
+                    1.0D);
             if(mob.getBlockPos().isWithinDistance(pos,3)) {
                 if(this.mob.world.getBlockState(pos).matches(BlockTags.LOGS))
                 {
                     this.mob.world.setBlockState(pos, CapybaraMain.OAK_WITHOUT_BARK.getDefaultState());
                 }
                 timer = 500;
-                System.out.println("Capybara, Found oak");
                 pos = null;
             }
         }
